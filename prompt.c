@@ -1,55 +1,47 @@
-/* 
- *    Programmed By: Mohammed Isam [mohammed_isam1984@yahoo.com]
- *    Copyright 2020 (c)
- * 
- *    file: prompt.c
- *    This file is part of the "Let's Build a Linux Shell" tutorial.
- *
- *    This tutorial is free software: you can redistribute it and/or modify
- *    it under the terms of the GNU General Public License as published by
- *    the Free Software Foundation, either version 3 of the License, or
- *    (at your option) any later version.
- *
- *    This tutorial is distributed in the hope that it will be useful,
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *    GNU General Public License for more details.
- *
- *    You should have received a copy of the GNU General Public License
- *    along with this tutorial.  If not, see <http://www.gnu.org/licenses/>.
- */    
+#include "holberton.h"
 
-#include <stdio.h>
-#include "shell.h"
-#include "symtab/symtab.h"
-
-
-void print_prompt1(void)
+/**
+ * prompt - call prompt from another function (prompt)
+ *
+ **/
+void prompt(void)
 {
-    struct symtab_entry_s *entry = get_symtab_entry("PS1");
+	for (;;)
+	{
+		char *text = NULL, **environ;
+		pid_t child_pid;
+		int status, lenbuf;
+		size_t bufsize = 0;
 
-    if(entry && entry->val)
-    {
-        fprintf(stderr, "%s", entry->val);
-    }
-    else
-    {
-        fprintf(stderr, "$ ");
-    }
-}
-
-
-void print_prompt2(void)
-{
-    struct symtab_entry_s *entry = get_symtab_entry("PS2");
-
-    if(entry && entry->val)
-    {
-        fprintf(stderr, "%s", entry->val);
-    }
-    else
-    {
-        fprintf(stderr, "> ");
-    }
-}
-
+		place("$ ");
+		lenbuf = getline(&text, &bufsize, stdin);
+		if (lenbuf == -1)
+			exit(98);
+		if (compareExit(text, "exit") == 0)
+			exit(0);
+		if (compareEnv(text, "env") == 0)
+		{
+			while (*environ != NULL)
+			{
+				if (!(_strcmpdir(*environ, "USER")) ||
+						!(_strcmpdir(*environ, "LANGUAGE")) ||
+						!(_strcmpdir(*environ, "SESSION")) ||
+						!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
+						!(_strcmpdir(*environ, "SHLV")) ||
+						!(_strcmpdir(*environ, "HOME")) ||
+						!(_strcmpdir(*environ, "C_IS")) ||
+						!(_strcmpdir(*environ, "DESKTOP_SESSION")) ||
+						!(_strcmpdir(*environ, "LOGNAME")) ||
+						!(_strcmpdir(*environ, "TERM")) ||
+						!(_strcmpdir(*environ, "PATH")))
+				{
+					place(*environ), place("\n"); }
+				environ++; }}
+		child_pid = fork();
+		if (child_pid < 0)
+			perror("Error");
+		if (child_pid == 0)
+			identify_string(text);
+		else
+			wait(&status);
+	}}
