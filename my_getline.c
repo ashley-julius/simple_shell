@@ -9,14 +9,15 @@
  */
 void _getline(appData_t *prmData)
 {
-	char c = '\0';
+	char c[1025];
 	int i = 0, rd, bufferSize = BUFFER_SIZE;
+	int k = 0;
 
 	prmData->buffer = _calloc(sizeof(char), BUFFER_SIZE);
 
-	while (c != '\n' && c != EOF)
+	while (c[k] != '\n' || c[k] != EOF)
 	{
-		rd = read(STDIN_FILENO, &c, 1);
+		rd = read(STDIN_FILENO, &c, 1024);
 
 		if (rd == 0)
 		{
@@ -38,8 +39,9 @@ void _getline(appData_t *prmData)
 			);
 			bufferSize = i + 2;
 		}
-		prmData->buffer[i] = c;
+		prmData->buffer[i] = c[k];
 		i++;
+		k++;
 	}
 	prmData->buffer[i] = '\0';
 }

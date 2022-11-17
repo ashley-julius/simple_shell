@@ -11,7 +11,7 @@
 
 * Returns: true (1), if found
 */
-int SearchArray(char c, char *Array)
+int _inArray(char c, char *Array)
 {
 	int i;
 	if(!Array)
@@ -21,8 +21,11 @@ int SearchArray(char c, char *Array)
 	else
 	{
 		for(i = 0; Array[i] != '\0'; i++)
+		{
 			if(Array[i] == c)
 				return(1);
+		}
 
 	}
+	return (0);
 }

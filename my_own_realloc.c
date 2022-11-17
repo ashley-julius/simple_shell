@@ -12,7 +12,7 @@
 * @newsize: How big you want it
 * Returns: a pointer to the newly allocated memory in the heap
 */
-void *_realloc(char *src, unsigned int oldsize, unsigned int newsize)
+void *_realloc(void *src, unsigned int oldsize, unsigned int newsize)
 {
 	void *s;
 

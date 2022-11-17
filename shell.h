@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define BUFFER_SIZE 256
+#define BUFFER_SIZE 1024
 #define ENV_SEPARATOR "="
 #define ESCAPE_SEPARATOR "#"
 #define PATH_SEPARATOR ":"
@@ -130,7 +130,7 @@ int _isdigit(char prmChar);
 int _isNumber(char *s);
 char *_itoa(int prmNumber);
 int _listEnvLen(environment_t *prmHead);
-char *_memcpy(char *prmDest, char *prmSrc, unsigned int prmLimit);
+char *_memcpy(char *prmDest, char *prmSrc, size_t prmLimit);
 char *_memset(char *prmString, char prmCharacter, unsigned int prmLimit);
 int _nbrLen(int prmNumber);
 char **_parsingPathEnvironment(appData_t *prmData);

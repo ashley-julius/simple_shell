@@ -1,5 +1,5 @@
 /* This function shows how to create a copy of one string to another */
-#include "header.h"
+#include "shell.h"
 
 /**
  *_strcpy - This function copies one string to the other
