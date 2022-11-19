@@ -17,7 +17,7 @@ int interactive(char *av[], int count_exe, char **env)
 	isatty(STDIN_FILENO) == 0 ? interactive = 0 : interactive;
 	while (1)
 	{
-		interactive == 1 ? write(STDIN_FILENO, "#cisfun$ ", 9) : interactive;
+		interactive == 1 ? write(STDIN_FILENO, "$ ", 2) : interactive;
 		read = getline(&line, &len, stdin);
 		if (read == EOF)
 		{
