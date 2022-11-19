@@ -4,6 +4,11 @@
 								  *
 *******************************************************************/
 
+		ALX SOFTWARE ENGINEERING SCHOOL
+
+
+
+
 This README file shows the project was being made as well as the processes,
 function prototypes and more.
 
